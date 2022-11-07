@@ -11,13 +11,15 @@ function Login() {
     <section className='login'>
       <Logo />
       <h2 className='login__title'>Рады видеть!</h2>
-      <label className='login__label' for='email'>E-mail</label>
-      <input className='login__input' name='email' id='email' type='email' />
-      <label className='login__label' for='password'>Пароль</label>
-      <input className='login__input' name='password' id='password' type='password' />
-      <button className='login__button_type_signin' aria-label='Войти' onClick={() => history.push('/movies')}>Войти</button>
+      <form className='login__form'>
+        <label className='login__form-label' for='email'>E-mail</label>
+        <input className='login__form-input' name='email' id='email' type='email' placeholder='Email' required />
+        <label className='login__form-label' for='password'>Пароль</label>
+        <input className='login__form-input' name='password' id='password' type='password' placeholder='Пароль' required />
+        <button className='login__form-button login__form-button_type_signin' type='submit' aria-label='Войти' onClick={() => history.push('/movies')}>Войти</button>
+      </form>
       <p className='login__info'>Ещё не зарегистрированы?<Link to='/signup' className='login__link content__link-style'>Регистрация</Link></p>
-    </section>
+    </section >
   )
 }
 

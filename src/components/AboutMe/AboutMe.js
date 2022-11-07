@@ -15,7 +15,7 @@ function AboutMe() {
             и дочь. Я люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить.
             С 2015 года работал в компании «СКБ Контур». После того, как прошёл курс по веб-разработке,
             начал заниматься фриланс-заказами и ушёл с постоянной работы.</p>
-          <div className='about-me__block-caption-link'><a href='https://github.com/' className='content__link-style'>Git</a></div>
+          <div className='about-me__block-caption-link'><a target='_blank' href='https://github.com/' className='content__link-style'>Git</a></div>
         </div>
         <img src={photo} alt='фото студента' className='about-me__block-photo' />
       </article>
