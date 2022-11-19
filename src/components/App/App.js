@@ -1,7 +1,6 @@
 import './App.css';
 
-import { Route, Switch } from 'react-router-dom';
-
+import { Route, Switch, useHistory } from 'react-router-dom';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
@@ -11,40 +10,238 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import Register from '../Register/Register';
 import Login from '../Login/Login';
 import PageNotFound from '../PageNotFound/PageNotFound';
+import Loader from '../Loader/Loader';
+import * as api from '../../utils/mainApi.js';
+import * as moviesApi from '../../utils/moviesApi.js'
+import React from 'react';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import ProtectedRoute from '../ProtectedRoute/ProtectdRoute';
+import ServerInfo from '../ServerInfo/ServerInfo';
+import { SERVER_RESPONSE_SUCCESS, SERVER_RESPONSE_ERROR, MESSAGE_SUCCESS_REGISTRATION, MESSAGE_SUCCESS_USER_DATA_SAVED } from '../../utils/constants';
+import { parceServerErrors } from '../../utils/serverErrorsParcer';
 
 function App() {
-  return (
-    <div className="app">
 
-      <Header />
+  const history = useHistory();
+  const [currentUser, setCurrentUser] = React.useState({});
+  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [movies, setMovies] = React.useState([]);
+  const [savedMovies, setSavedMovies] = React.useState([]);
+  const [isMoviesLoaded, setMoviesLoaded] = React.useState(true);
+  const [isServerInfoVisible, setServerInfoVisible] = React.useState(false);
+  const [serverMessage, setServerMessage] = React.useState('');
+  const [serverResponse, setServerResponce] = React.useState('');
+  const [isServerLoadingData, setServerLoadingData] = React.useState(false);
+  const [isAuthChecked, setIsAuthChecked] = React.useState(false);
 
-      <Switch>
-        <Route path="/movies">
-          <Movies />
-        </Route>
-        <Route path="/profile">
-          <Profile />
-        </Route>
-        <Route path='/saved-movies'>
-          <SavedMovies />
-        </Route>
-        <Route path='/signup'>
-          <Register />
-        </Route>
-        <Route path='/signin'>
-          <Login />
-        </Route>
-        <Route exact path='/'>
-          <Main />
-        </Route>
-        <Route path='*'>
-          <PageNotFound />
-        </Route>
-      </Switch>
+  React.useEffect(() => {
+    if (localStorage.getItem('token')) {
+      handleCheckToken();
+    } else setIsAuthChecked(true);
+  }, []);
 
-      <Footer />
-      
-    </div>
+  React.useEffect(() => {
+    if (loggedIn) {
+      setMoviesLoaded(true);
+      moviesApi.getMovies().then((data) => {
+        setMovies(data);
+        setMoviesLoaded(false);
+      })
+        .catch((err) => {
+          setServerMessage(err);
+          setServerInfoVisible(true);
+        });
+    }
+  }, [loggedIn])
+
+  React.useEffect(() => {
+    if (loggedIn) {
+      api.getSavedMovies().then((data) => {
+        setSavedMovies(data);
+      })
+        .catch((err) => {
+          setServerMessage(err);
+          setServerInfoVisible(true);
+        });
+    }
+  }, [loggedIn])
+
+  const showServerErrorMessage = (message) => {
+    setServerMessage(parceServerErrors(message));
+    setServerInfoVisible(true);
+    setServerResponce(SERVER_RESPONSE_ERROR);
+  }
+
+  const showServerSuccessMessage = (message) => {
+    setServerMessage(message);
+    setServerInfoVisible(true);
+    setServerResponce(SERVER_RESPONSE_SUCCESS);
+  }
+
+  const handleRegistration = (name, email, password) => {
+    setServerLoadingData(true);
+    setServerInfoVisible(true);
+    api.register(name, email, password).then((data) => {
+      if (data) {
+        setServerLoadingData(false);
+        handleLogin(email, password);
+        showServerSuccessMessage(MESSAGE_SUCCESS_REGISTRATION);
+      }
+    })
+      .catch((err) => {
+        setServerLoadingData(false);
+        showServerErrorMessage(err);
+      });
+  }
+
+  const handleLogin = (email, password) => {
+    api.login(email, password).then((data) => {
+      if (data) {
+        setServerLoadingData(false);
+        localStorage.setItem('token', data.token);
+        handleCheckToken();
+        history.push('/movies');
+      }
+    })
+      .catch((err) => {
+        setServerLoadingData(false);
+        showServerErrorMessage(err);
+      });
+  }
+
+  const handleLogout = () => {
+    localStorage.clear();
+    setLoggedIn(false);
+    history.push('/');
+  }
+
+  const handleCheckToken = () => {
+    api.checkToken().then((data) => {
+      if (data) {
+        setCurrentUser(data);
+        setLoggedIn(true);
+      }
+      setIsAuthChecked(true);
+    })
+      .catch((err) => {
+        setIsAuthChecked(true);
+        showServerErrorMessage(err);
+      });
+  }
+
+  const handleUserUpdate = (name, email) => {
+    setServerLoadingData(true);
+    setServerInfoVisible(true);
+    api.updateUser(name, email).then((data) => {
+      if (data) {
+        setServerLoadingData(false);
+        setCurrentUser(data);
+        showServerSuccessMessage(MESSAGE_SUCCESS_USER_DATA_SAVED);
+      }
+    })
+      .catch((err) => {
+        showServerErrorMessage(err);
+      });
+  }
+
+  const handleLike = (movie) => {
+    api.saveMovie(movie).then((data) => {
+      setSavedMovies([...savedMovies, data]);
+    })
+      .catch((err) => {
+        showServerErrorMessage(err);
+      });
+  }
+
+  const handleDelete = (movie) => {
+    api.deleteMovie(movie._id).then(() => {
+      setSavedMovies((state) => state.filter((m) => m._id === movie._id ? false : true));
+    })
+      .catch((err) => {
+        showServerErrorMessage(err);
+      });
+  }
+
+  return (<>
+    {!isAuthChecked
+      ? <Loader />
+      : <div className="app">
+
+        <ServerInfo
+          isServerInfoVisible={isServerInfoVisible}
+          setServerInfoVisible={setServerInfoVisible}
+          serverMessage={serverMessage}
+          serverResponse={serverResponse}
+          setServerResponce={setServerResponce}
+          setServerMessage={setServerMessage}
+          isServerLoadingData={isServerLoadingData}
+        />
+
+        <CurrentUserContext.Provider value={{
+          user: currentUser,
+          loggedIn,
+          savedMovies
+        }}>
+
+          <Header />
+
+          <Switch>
+
+            <ProtectedRoute
+              path='/saved-movies'
+              component={SavedMovies}
+              handleDelete={handleDelete}
+              isMoviesLoaded={isMoviesLoaded}
+              setMoviesLoaded={setMoviesLoaded}
+            />
+
+            <ProtectedRoute
+              path='/movies'
+              component={Movies}
+              movies={movies}
+              handleLike={handleLike}
+              handleDelete={handleDelete}
+              isMoviesLoaded={isMoviesLoaded}
+              setMoviesLoaded={setMoviesLoaded}
+            />
+
+            <ProtectedRoute
+              path='/profile'
+              component={Profile}
+              onUpdateUser={handleUserUpdate}
+              onLogout={handleLogout}
+              isServerLoadingData={isServerLoadingData}
+            />
+
+            <Route path='/signup'>
+              <Register
+                onRegistration={handleRegistration}
+                isServerLoadingData={isServerLoadingData}
+              />
+            </Route>
+
+            <Route path='/signin'>
+              <Login
+                onLogin={handleLogin}
+                isServerLoadingData={isServerLoadingData} />
+            </Route>
+
+            <Route exact path='/'>
+              <Main />
+            </Route>
+
+            <Route path='*'>
+              <PageNotFound />
+            </Route>
+
+          </Switch>
+
+          <Footer />
+
+        </CurrentUserContext.Provider>
+      </div>
+    }
+  </>
   );
 }
 

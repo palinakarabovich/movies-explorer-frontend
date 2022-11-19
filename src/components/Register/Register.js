@@ -1,29 +1,46 @@
 import '../Main/Main.css';
 import './Register.css';
+
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
-
+import { Link, Redirect } from 'react-router-dom';
+import AuthForm from '../AuthForm/AuthForm';
 import Logo from '../Logo/Logo';
+import useFormWithValidation from '../../hooks/useFormWithValidation';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-function Register() {
+function Register({ onRegistration, isServerLoadingData }) {
 
-  const history = useHistory();
+  const formWithValidation = useFormWithValidation();
+  const { name, email, password } = formWithValidation.values;
+  const { loggedIn } = React.useContext(CurrentUserContext);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    onRegistration(name, email, password);
+    formWithValidation.resetForm();
+  };
+
   return (
-    <section className='register'>
-      <Logo />
-      <h2 className='register__title'>Добро пожаловать!</h2>
-      <form className='register__form'>
-        <label className='register__form-label' for='name'>Имя</label>
-        <input className='register__form-input' name='name' id='name' type='text' placeholder='Имя' required minLength={2} maxLength={30} />
-        <label className='register__form-label' for='email'>E-mail</label>
-        <input className='register__form-input' name='email' id='email' type='email' placeholder='Email' required />
-        <label className='register__form-label' for='password'>Пароль</label>
-        <input className='register__form-input' name='password' id='password' type='password' placeholder='Пароль' required />
-        <button className='register__form-button register__form-button_type_signup' type='submit' aria-label='Зарегистрироваться' onClick={() => history.push('/signin')}>Зарегистрироваться</button>
-      </form>
-      <p className='register__info'>Уже зарегистрированы?<Link to='/signin' className='register__link content__link-style'>Войти</Link></p>
-    </section>
-  )
+    <>
+      {loggedIn
+        ? <Redirect to='/' />
+        : (
+          <section className='register'>
+            <Logo />
+            <h2 className='register__title'>Добро пожаловать!</h2>
+            <AuthForm
+              onSubmit={submitHandler}
+              formData={formWithValidation}
+              isServerLoadingData={isServerLoadingData}
+            />
+            <p className='register__info'>
+              Уже зарегистрированы?
+              <Link className='register__link content__link-style' to='/signin'>Войти</Link>
+            </p>
+          </section>)
+      }
+    </>
+  );
 }
 
 export default Register;
