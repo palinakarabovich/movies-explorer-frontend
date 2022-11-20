@@ -1,6 +1,6 @@
 export const SERVER__URL = 'https://api.nomoreparties.co/';
 
-export const API_MAIN_URL = 'https://palinakarabovich.mesto.nomoredomains.icu';
+export const API_MAIN_URL = 'https://palinakarabovich.mesto.nomoredomains.icu/api';
 
 export const API_MOVIE_URL = 'https://api.nomoreparties.co/beatfilm-movies';
 
