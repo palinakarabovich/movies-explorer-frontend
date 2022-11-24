@@ -31,6 +31,13 @@ function Profile({ onUpdateUser, onLogout, isServerLoadingData }) {
     }
   }, [userName, userEmail])
 
+  React.useEffect(() => {
+    if (!isEditMode){
+      setUserName(user.name);
+      setUserEmail(user.email);
+    }
+  },[isEditMode])
+
   return (
     <section className='profile'>
       <h2 className='profile__title'>Привет, {user.name}!</h2>

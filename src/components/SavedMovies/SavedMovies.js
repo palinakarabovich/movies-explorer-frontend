@@ -8,7 +8,7 @@ import React from 'react';
 
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-function SavedMovies({ handleDelete, isMoviesLoaded, setMoviesLoaded }) {
+function SavedMovies({ handleDelete, isMoviesLoaded, setMoviesLoaded, isServerLoadingData }) {
 
   const [searchValue, setSearchValue] = React.useState('');
   const [checkboxIsChecked, setCheckboxChecked] = React.useState(false);
@@ -31,7 +31,9 @@ function SavedMovies({ handleDelete, isMoviesLoaded, setMoviesLoaded }) {
   }, [searchValue, checkboxIsChecked, savedMovies]);
 
   React.useEffect(() => {
-    setMoviesLoaded(false)
+    if (isServerLoadingData) {
+      setMoviesLoaded(true);
+    } else setMoviesLoaded(false);
   }, [sortedMovies]);
 
   return (

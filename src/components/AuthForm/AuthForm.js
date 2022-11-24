@@ -1,16 +1,24 @@
 import React from 'react';
 import './AuthForm.css';
+import useFormWithValidation from '../../hooks/useFormWithValidation'
 
-function AuthForm({ FormTypeLogin, onSubmit, formData }) {
+function AuthForm({ FormTypeLogin, onSubmit }) {
 
-  const { values, handleChange, errors, isValid, resetForm, isServerLoadingData } = formData;
+  const { values, handleChange, errors, isValid, resetForm, isServerLoadingData } = useFormWithValidation();
 
   React.useEffect(() => {
     resetForm();
   }, [resetForm]);
 
+  function handleSubmit(e) {
+    e.preventDefault();
+    !FormTypeLogin
+      ? onSubmit(values.name, values.email, values.password)
+      : onSubmit(values.email, values.password);
+  };
+
   return (
-    <form className='auth-form' onSubmit={onSubmit} noValidate >
+    <form className='auth-form' onSubmit={handleSubmit} noValidate >
 
       {!FormTypeLogin && (
 
@@ -44,6 +52,7 @@ function AuthForm({ FormTypeLogin, onSubmit, formData }) {
           onChange={handleChange}
           value={values.email}
           autoComplete='disabled'
+          pattern='^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$'
           disabled={isServerLoadingData}
         />
       </label>

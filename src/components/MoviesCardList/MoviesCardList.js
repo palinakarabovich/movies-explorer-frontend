@@ -60,7 +60,7 @@ function MoviesCardList({ movies, handleLike, handleDelete, isMoviesLoaded, sear
           ? <p className='movies-list__empty'>Воспользуйтесь поиском, чтобы найти фильмы :-) </p>
           : savedMovies.length === 0 && page === PAGE_SAVED_MOVIES
             ? (<p className='movies-list__empty'>Вы еще не добавили ни одного фильма в избранное</p>)
-            : movies.length === 0
+            : movies.length === 0 && !isMoviesLoaded
               ? (<p className='movies-list__empty'>Ничего не найдено</p>)
               : (<><ul className='movies-list__cards content__list-style'>
                 {

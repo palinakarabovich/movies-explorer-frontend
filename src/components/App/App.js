@@ -33,23 +33,28 @@ function App() {
   const [serverResponse, setServerResponce] = React.useState('');
   const [isServerLoadingData, setServerLoadingData] = React.useState(false);
   const [isAuthChecked, setIsAuthChecked] = React.useState(false);
+  const [isSavedMoviesLoading, setSavedMoviesLoading] = React.useState(true);
+  const [isAllMoviesLoading, setAllMoviesLoading] = React.useState(true);
 
   React.useEffect(() => {
     if (localStorage.getItem('token')) {
       handleCheckToken();
-    } else setIsAuthChecked(true);
+    } else {
+      setIsAuthChecked(true);
+      localStorage.clear();
+    };
   }, []);
 
   React.useEffect(() => {
     if (loggedIn) {
-      setMoviesLoaded(true);
       moviesApi.getMovies().then((data) => {
         setMovies(data);
-        setMoviesLoaded(false);
+        setAllMoviesLoading(false);
       })
         .catch((err) => {
           setServerMessage(err);
           setServerInfoVisible(true);
+          setAllMoviesLoading(false);
         });
     }
   }, [loggedIn])
@@ -58,10 +63,12 @@ function App() {
     if (loggedIn) {
       api.getSavedMovies().then((data) => {
         setSavedMovies(data);
+        setSavedMoviesLoading(false);
       })
         .catch((err) => {
           setServerMessage(err);
           setServerInfoVisible(true);
+          setSavedMoviesLoading(false);
         });
     }
   }, [loggedIn])
@@ -83,7 +90,6 @@ function App() {
     setServerInfoVisible(true);
     api.register(name, email, password).then((data) => {
       if (data) {
-        setServerLoadingData(false);
         handleLogin(email, password);
         showServerSuccessMessage(MESSAGE_SUCCESS_REGISTRATION);
       }
@@ -99,14 +105,15 @@ function App() {
       if (data) {
         setServerLoadingData(false);
         localStorage.setItem('token', data.token);
-        handleCheckToken();
+        setLoggedIn(true);
         history.push('/movies');
+        handleCheckToken();
       }
     })
       .catch((err) => {
         setServerLoadingData(false);
         showServerErrorMessage(err);
-      });
+      })
   }
 
   const handleLogout = () => {
@@ -120,13 +127,14 @@ function App() {
       if (data) {
         setCurrentUser(data);
         setLoggedIn(true);
+        setIsAuthChecked(true);
       }
-      setIsAuthChecked(true);
     })
       .catch((err) => {
-        setIsAuthChecked(true);
+        handleLogout();
         showServerErrorMessage(err);
-      });
+        setIsAuthChecked(true);
+      })
   }
 
   const handleUserUpdate = (name, email) => {
@@ -140,8 +148,9 @@ function App() {
       }
     })
       .catch((err) => {
+        setServerLoadingData(false);
         showServerErrorMessage(err);
-      });
+      })
   }
 
   const handleLike = (movie) => {
@@ -162,10 +171,10 @@ function App() {
       });
   }
 
-  return (<>
+  return (<div className='app'>
     {!isAuthChecked
-      ? <Loader />
-      : <div className="app">
+      ? <div className="app app__loader"><Loader /></div>
+      : <div className="app app__main">
 
         <ServerInfo
           isServerInfoVisible={isServerInfoVisible}
@@ -193,6 +202,7 @@ function App() {
               handleDelete={handleDelete}
               isMoviesLoaded={isMoviesLoaded}
               setMoviesLoaded={setMoviesLoaded}
+              isServerLoadingData={isSavedMoviesLoading}
             />
 
             <ProtectedRoute
@@ -203,6 +213,7 @@ function App() {
               handleDelete={handleDelete}
               isMoviesLoaded={isMoviesLoaded}
               setMoviesLoaded={setMoviesLoaded}
+              isServerLoadingData={isAllMoviesLoading}
             />
 
             <ProtectedRoute
@@ -241,7 +252,7 @@ function App() {
         </CurrentUserContext.Provider>
       </div>
     }
-  </>
+  </div>
   );
 }
 

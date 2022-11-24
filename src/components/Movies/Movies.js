@@ -5,7 +5,7 @@ import React from 'react';
 import { filterMovies, filterMoviesDuration } from '../../utils/moviesFiltration';
 import { SHORTFILM_DURATION, PAGE_ALL_MOVIES } from '../../utils/constants';
 
-function Movies({ movies, handleLike, handleDelete, isMoviesLoaded, setMoviesLoaded }) {
+function Movies({ movies, handleLike, handleDelete, isMoviesLoaded, setMoviesLoaded, isServerLoadingData }) {
 
   const [searchValue, setSearchValue] = React.useState(localStorage.getItem('searchInputMovies') || '');
   const [sortedMovies, setSortedMovies] = React.useState([]);
@@ -24,12 +24,16 @@ function Movies({ movies, handleLike, handleDelete, isMoviesLoaded, setMoviesLoa
   }, [searchValue, checkboxIsChecked, movies]);
 
   React.useEffect(() => {
-    setMoviesLoaded(false)
-  }, [sortedMovies]);
+    if (localStorage.getItem('searchInputMovies') === '') {
+      setMoviesLoaded(false)
+    }
+  }, [movies]);
 
   React.useEffect(() => {
-    setMoviesLoaded(false)
-  }, [movies]);
+    if (isServerLoadingData) {
+      setMoviesLoaded(true);
+    } else setMoviesLoaded(false);
+  }, [sortedMovies]);
 
   return (
     <>
