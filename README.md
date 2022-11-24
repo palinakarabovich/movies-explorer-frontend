@@ -29,3 +29,5 @@
 ------------
 
 * [Ссылка на макет в Figma](https://www.figma.com/file/mRQRmjCvYJAdXkqXZomvXv/diploma?node-id=891%3A3857)
+* [Ссылка на проект](https://movies.karabovich.nomoredomains.club/)
+* [Ссылка на pull request](https://github.com/palinakarabovich/movies-explorer-frontend/compare/main...level-3)
