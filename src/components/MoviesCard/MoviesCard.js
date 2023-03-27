@@ -34,17 +34,17 @@ function MoviesCard({ movie, handleLike, handleDelete }) {
       <a className='content__link-style' target='_blank' href={movie.trailerLink}>
 
         <Route exact path='/movies'>
-          <img src={`${SERVER__URL}${movie.image.url}`} alt={movie.nameRU} className='movie-card__cover' />
+          <img src={`${SERVER__URL}${movie.image.url}`} alt={movie.nameEN} className='movie-card__cover' />
         </Route>
 
         <Route exact path='/saved-movies'>
-          <img src={`${movie.image}`} alt={movie.nameRU} className='movie-card__cover' />
+          <img src={`${movie.image}`} alt={movie.nameEN} className='movie-card__cover' />
         </Route>
 
       </a>
 
       <div className='movie-card__block'>
-        <h2 className='movie-card__block-name'>{movie.nameRU}</h2>
+        <h2 className='movie-card__block-name'>{movie.nameEN}</h2>
 
         <Route exact path='/movies'>
           <button className={`movie-card__block-button movie-card__block-button_type_like ${isLiked && 'movie-card__block-button_type_like_active'}`} aria-label='Добавить в избранное' onClick={onLikeClick} />

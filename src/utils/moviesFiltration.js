@@ -1,5 +1,5 @@
 export const filterMovies = (movies, input) => {
-  return movies.filter((movie) => movie.nameRU.toLowerCase().includes(input.toLowerCase())
+  return movies.filter((movie) => movie.nameEN.toLowerCase().includes(input.toLowerCase())
     || movie.nameEN.toLowerCase().includes(input.toLowerCase()));
 };
 
