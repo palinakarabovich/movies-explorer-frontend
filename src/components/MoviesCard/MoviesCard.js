@@ -1,26 +1,61 @@
+import '../Main/Main'
 import './MoviesCard.css';
-
-import movieCover from '../../images/movie-cover.jpg';
 
 import React from 'react';
 import { Route } from 'react-router-dom';
+import { SERVER__URL } from '../../utils/constants';
+import { convertFilmDuration } from '../../utils/durationConverter';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-function MoviesCard() {
+function MoviesCard({ movie, handleLike, handleDelete }) {
   const [isLiked, setLiked] = React.useState(false);
+  const { savedMovies } = React.useContext(CurrentUserContext);
+
+  React.useEffect(() => {
+    setLiked((state) => state = savedMovies.some(m => m.movieId === movie.id));
+  }, [savedMovies, movie]);
+
+  const onLikeClick = () => {
+    if (!isLiked) {
+      handleLike(movie);
+      setLiked(true);
+    }
+    if (isLiked) {
+      handleDelete(savedMovies.find(m => m.movieId === movie.id))
+    }
+  }
+
+  const onDeleteClick = () => {
+    handleDelete(movie);
+  }
 
   return (
     <article className='movie-card'>
-      <img src={movieCover} alt='обложка фильма' className='movie-card__cover' />
-      <div className='movie-card__block'>
-        <h2 className='movie-card__block-name'>33 слова о дизайне</h2>
+      <a className='content__link-style' target='_blank' href={movie.trailerLink}>
+
         <Route exact path='/movies'>
-          <button className={`movie-card__block-button movie-card__block-button_type_like ${isLiked && 'movie-card__block-button_type_like_active'}`} aria-label='Добавить в избранное' onClick={() => setLiked(!isLiked)} />
+          <img src={`${SERVER__URL}${movie.image.url}`} alt={movie.nameEN} className='movie-card__cover' />
         </Route>
+
         <Route exact path='/saved-movies'>
-          <button className='movie-card__block-button movie-card__block-button_type_delete' aria-label='Удалить из избранного' />
+          <img src={`${movie.image}`} alt={movie.nameEN} className='movie-card__cover' />
         </Route>
+
+      </a>
+
+      <div className='movie-card__block'>
+        <h2 className='movie-card__block-name'>{movie.nameEN}</h2>
+
+        <Route exact path='/movies'>
+          <button className={`movie-card__block-button movie-card__block-button_type_like ${isLiked && 'movie-card__block-button_type_like_active'}`} aria-label='Добавить в избранное' onClick={onLikeClick} />
+        </Route>
+
+        <Route exact path='/saved-movies'>
+          <button className='movie-card__block-button movie-card__block-button_type_delete' aria-label='Удалить из избранного' onClick={onDeleteClick} />
+        </Route>
+
       </div>
-      <p className='movie-card__duration'>1ч42м</p>
+      <p className='movie-card__duration'>{convertFilmDuration(movie.duration)}</p>
     </article>
   )
 }

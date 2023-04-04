@@ -85,6 +85,10 @@
   margin-bottom: 16px;
 }
 
+.profile__button_type_edit:disabled{
+  color: #8B8B8B;
+}
+
 .profile__button_type_sign-out {
   color: rgba(255, 64, 98, 1);
 }

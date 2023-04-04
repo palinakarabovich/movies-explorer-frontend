@@ -6,7 +6,7 @@
 }
 
 .movie-card__cover {
-  width: 100%;
+  width: 270px;
   height: 151px;
   object-fit: cover;
   object-position: center;
@@ -39,6 +39,7 @@
   background-color: transparent;
   width: 24px;
   height: 24px;
+  z-index: 10;
 }
 
 .movie-card__block-button:hover {
@@ -73,6 +74,7 @@
 
   .movie-card__cover {
     height: 190px;
+    width: 339px;
   }
 }
 
