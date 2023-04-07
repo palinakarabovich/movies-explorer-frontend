@@ -40,9 +40,9 @@ function Profile({ onUpdateUser, onLogout, isServerLoadingData }) {
 
   return (
     <section className='profile'>
-      <h2 className='profile__title'>Привет, {user.name}!</h2>
+      <h2 className='profile__title'>Hi, {user.name}!</h2>
       <ul className='ptrofile__info content__list-style'>
-        <li className='profile__info-field'>Имя
+        <li className='profile__info-field'>Name
           <span>{isEditMode ? (<input type='text' className='profile__info-field_active' value={userName} disabled={isServerLoadingData} onChange={(e) => setUserName(e.target.value)} />) : (`${user.name}`)} </span>
         </li>
         <li className='profile__info-field'>Email
@@ -50,9 +50,9 @@ function Profile({ onUpdateUser, onLogout, isServerLoadingData }) {
         </li>
       </ul>
       <button className='profile__button profile__button_type_edit' onClick={onEditProfileClick} disabled={isButtonDisabled}>
-        {isEditMode ? 'Cохранить' : 'Редактировать'}
+        {isEditMode ? 'Save' : 'Edit'}
       </button>
-      <button className='profile__button profile__button_type_sign-out' onClick={onLogout}>Выйти из аккаунта</button>
+      <button className='profile__button profile__button_type_sign-out' onClick={onLogout}>Log out</button>
     </section>
   );
 }

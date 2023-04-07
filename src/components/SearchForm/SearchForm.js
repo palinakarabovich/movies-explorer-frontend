@@ -30,14 +30,14 @@ function SearchForm({ searchValue, setSearchValue, checkboxIsChecked, setCheckbo
   return (
     <section className='search-form'>
       <div className='search-form__block'>
-        <input type='text' id='search-input' name='search-input' placeholder={`${isInputDisabled ? 'В избранном нет фильмов для поиска' : 'Фильм'}`} className='search-form__block-input' value={searchValue} onChange={(e) => setSearchValue(e.target.value)} disabled={isInputDisabled} />
-        {searchValue && <button className='search-form__block-button search-form__block-button_type_clean' aria-label='Очистить поиск' onClick={() => setSearchValue('')} />}
-        <button className='search-form__block-button search-form__block-button_type_search' value='Поиск' aria-label='Поиск по фильмам' disabled={isInputDisabled}>Поиск</button>
+        <input type='text' id='search-input' name='search-input' placeholder={`${isInputDisabled ? 'Add some movies to favourites first' : 'Movie...'}`} className='search-form__block-input' value={searchValue} onChange={(e) => setSearchValue(e.target.value)} disabled={isInputDisabled} />
+        {searchValue && <button className='search-form__block-button search-form__block-button_type_clean' aria-label='Clear' onClick={() => setSearchValue('')} />}
+        <button className='search-form__block-button search-form__block-button_type_search' value='Поиск' aria-label='Search' disabled={isInputDisabled}>Search</button>
       </div>
       <div className='search-form__checkbox-group'>
         <input className='search-form__checkbox-group-input' type='checkbox' id='checkbox-input' name='checkbox-input' />
         <label className={`search-form__checkbox-group-label search-form__checkbox-group-label_type_slider ${checkboxIsChecked && 'search-form__checkbox-group-label_type_slider_checked'}`} htmlFor='checkbox-input' onClick={onClickCheckBox} />
-        <label className='search-form__checkbox-group-label search-form__checkbox-group-label_type_caption' htmlFor='checkbox-input' onClick={onClickCheckBox} >Короткометражки</label>
+        <label className='search-form__checkbox-group-label search-form__checkbox-group-label_type_caption' htmlFor='checkbox-input' onClick={onClickCheckBox} >Short films</label>
       </div>
     </section>
   )

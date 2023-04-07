@@ -19,15 +19,15 @@ function Login({ onLogin, isServerLoadingData }) {
         : (
           <section className='login'>
             <Logo />
-            <h2 className='login__title'>Рады видеть!</h2>
+            <h2 className='login__title'>Hice to see you!</h2>
             <AuthForm
               FormTypeLogin
               onSubmit={onLogin}
               isServerLoadingData={isServerLoadingData}
             />
             <p className='login__info'>
-              Ещё не зарегистрированы?
-              <Link className='login__link content__link-style' to='/signup'>Регистрация</Link>
+              Want to make an account? 
+              <Link className='login__link content__link-style' to='/signup'>Sign up</Link>
             </p>
           </section>
         )

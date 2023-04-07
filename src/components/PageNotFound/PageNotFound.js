@@ -10,9 +10,9 @@ function PageNotFound() {
     <div className='page-not-found'>
       <div className='page-not-found__block'>
         <h2 className='page-not-found__block-error-code'>404</h2>
-        <p className='page-not-found__block-error-description'>Страница не найдена</p>
+        <p className='page-not-found__block-error-description'>Page was not found</p>
       </div>
-      <button className='page-not-found__button page-not-found__button_type_back' onClick={() => history.goBack()}>Назад</button>
+      <button className='page-not-found__button page-not-found__button_type_back' onClick={() => history.goBack()}>Back</button>
     </div >
   )
 }

@@ -16,11 +16,11 @@ export const PAGE_SAVED_MOVIES = 'SavedMovies';
 
 export const PAGE_ALL_MOVIES = 'Movies';
 
-export const SERVER_RESPONSE_SUCCESS = 'Ура!';
+export const SERVER_RESPONSE_SUCCESS = 'Hooray!';
 
-export const SERVER_RESPONSE_ERROR = 'Что-то пошло не так...'
+export const SERVER_RESPONSE_ERROR = 'Something went wrong...'
 
-export const MESSAGE_SUCCESS_REGISTRATION = 'Вы успешно зарегистрированы';
+export const MESSAGE_SUCCESS_REGISTRATION = 'Your registration was successful';
 
-export const MESSAGE_SUCCESS_USER_DATA_SAVED = 'Данные сохранены';
+export const MESSAGE_SUCCESS_USER_DATA_SAVED = 'Changes saved';
 
