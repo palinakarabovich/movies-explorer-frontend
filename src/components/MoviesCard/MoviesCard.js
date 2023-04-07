@@ -47,11 +47,11 @@ function MoviesCard({ movie, handleLike, handleDelete }) {
         <h2 className='movie-card__block-name'>{movie.nameEN}</h2>
 
         <Route exact path='/movies'>
-          <button className={`movie-card__block-button movie-card__block-button_type_like ${isLiked && 'movie-card__block-button_type_like_active'}`} aria-label='Добавить в избранное' onClick={onLikeClick} />
+          <button className={`movie-card__block-button movie-card__block-button_type_like ${isLiked && 'movie-card__block-button_type_like_active'}`} aria-label='Add to favourites' onClick={onLikeClick} />
         </Route>
 
         <Route exact path='/saved-movies'>
-          <button className='movie-card__block-button movie-card__block-button_type_delete' aria-label='Удалить из избранного' onClick={onDeleteClick} />
+          <button className='movie-card__block-button movie-card__block-button_type_delete' aria-label='Delete from favoutites' onClick={onDeleteClick} />
         </Route>
 
       </div>

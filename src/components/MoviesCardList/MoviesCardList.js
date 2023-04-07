@@ -57,17 +57,17 @@ function MoviesCardList({ movies, handleLike, handleDelete, isMoviesLoaded, sear
       {isMoviesLoaded
         ? (<Loader />)
         : searchValue === '' && page === PAGE_ALL_MOVIES
-          ? <p className='movies-list__empty'>Воспользуйтесь поиском, чтобы найти фильмы :-) </p>
+          ? <p className='movies-list__empty'>Use search bar above to find some films. After you can also click on a small heart under the picture to save the movie to your favorites  :-) </p>
           : savedMovies.length === 0 && page === PAGE_SAVED_MOVIES
-            ? (<p className='movies-list__empty'>Вы еще не добавили ни одного фильма в избранное</p>)
+            ? (<p className='movies-list__empty'>You have not added any films to favoutites yet</p>)
             : movies.length === 0 && !isMoviesLoaded
-              ? (<p className='movies-list__empty'>Ничего не найдено</p>)
+              ? (<p className='movies-list__empty'>Can not find anything</p>)
               : (<><ul className='movies-list__cards content__list-style'>
                 {
                   moviesToRender.map((movie) => (<MoviesCard movie={movie} handleLike={handleLike} key={movie.id || movie._id} handleDelete={handleDelete} />))
                 }
               </ul>
-                {currentCount < movies.length && (<button value='еще' className='movies-list__button movies-list__button_type_load' aria-label='Загрузить еще фильмы' onClick={renderMore}>Еще</button>)}</>)
+                {currentCount < movies.length && (<button value='еще' className='movies-list__button movies-list__button_type_load' aria-label='Show more' onClick={renderMore}>More</button>)}</>)
       }
     </section>
   );

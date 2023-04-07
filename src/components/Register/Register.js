@@ -18,14 +18,14 @@ function Register({ onRegistration, isServerLoadingData }) {
         : (
           <section className='register'>
             <Logo />
-            <h2 className='register__title'>Добро пожаловать!</h2>
+            <h2 className='register__title'>Nice to see you!</h2>
             <AuthForm
               onSubmit={onRegistration}
               isServerLoadingData={isServerLoadingData}
             />
             <p className='register__info'>
-              Уже зарегистрированы?
-              <Link className='register__link content__link-style' to='/signin'>Войти</Link>
+              Have an account?
+              <Link className='register__link content__link-style' to='/signin'>Sign in</Link>
             </p>
           </section>)
       }
