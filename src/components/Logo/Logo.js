@@ -6,7 +6,7 @@ import logo from '../../images/logo.svg';
 
 function Logo() {
   return (
-    <NavLink to='/'><img src={logo} alt='логотип' className='logo__pic' /></NavLink>
+    <NavLink to='/movies-explorer-frontend/'><img src={logo} alt='логотип' className='logo__pic' /></NavLink>
   );
 }
 

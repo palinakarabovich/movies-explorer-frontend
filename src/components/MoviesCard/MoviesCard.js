@@ -33,11 +33,11 @@ function MoviesCard({ movie, handleLike, handleDelete }) {
     <article className='movie-card'>
       <a className='content__link-style' target='_blank' href={movie.trailerLink}>
 
-        <Route exact path='/movies'>
+        <Route exact path='/movies-explorer-frontend/movies'>
           <img src={`${SERVER__URL}${movie.image.url}`} alt={movie.nameEN} className='movie-card__cover' />
         </Route>
 
-        <Route exact path='/saved-movies'>
+        <Route exact path='/movies-explorer-frontend/saved-movies'>
           <img src={`${movie.image}`} alt={movie.nameEN} className='movie-card__cover' />
         </Route>
 
@@ -46,11 +46,11 @@ function MoviesCard({ movie, handleLike, handleDelete }) {
       <div className='movie-card__block'>
         <h2 className='movie-card__block-name'>{movie.nameEN}</h2>
 
-        <Route exact path='/movies'>
+        <Route exact path='/movies-explorer-frontend/movies'>
           <button className={`movie-card__block-button movie-card__block-button_type_like ${isLiked && 'movie-card__block-button_type_like_active'}`} aria-label='Add to favourites' onClick={onLikeClick} />
         </Route>
 
-        <Route exact path='/saved-movies'>
+        <Route exact path='/movies-explorer-frontend/saved-movies'>
           <button className='movie-card__block-button movie-card__block-button_type_delete' aria-label='Delete from favoutites' onClick={onDeleteClick} />
         </Route>
 

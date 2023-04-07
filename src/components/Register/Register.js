@@ -25,7 +25,7 @@ function Register({ onRegistration, isServerLoadingData }) {
             />
             <p className='register__info'>
               Have an account?
-              <Link className='register__link content__link-style' to='/signin'>Sign in</Link>
+              <Link className='register__link content__link-style' to='/movies-explorer-frontend/signin'>Sign in</Link>
             </p>
           </section>)
       }

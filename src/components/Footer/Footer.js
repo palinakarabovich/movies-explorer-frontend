@@ -5,7 +5,7 @@ import { Route } from 'react-router-dom';
 
 function Footer() {
 
-  const endPoints = ['/movies', '/saved-movies', '/']
+  const endPoints = ['/movies-explorer-frontend/movies', '/movies-explorer-frontend/saved-movies', '/movies-explorer-frontend/']
 
   return (
     <Route exact path={endPoints}>

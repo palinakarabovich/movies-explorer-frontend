@@ -106,7 +106,7 @@ function App() {
         setServerLoadingData(false);
         localStorage.setItem('token', data.token);
         setLoggedIn(true);
-        history.push('/movies');
+        history.push('/movies-explorer-frontend/movies');
         handleCheckToken();
       }
     })
@@ -119,7 +119,7 @@ function App() {
   const handleLogout = () => {
     localStorage.clear();
     setLoggedIn(false);
-    history.push('/');
+    history.push('/movies-explorer-frontend/');
   }
 
   const handleCheckToken = () => {
@@ -197,7 +197,7 @@ function App() {
           <Switch>
 
             <ProtectedRoute
-              path='/saved-movies'
+              path='/movies-explorer-frontend/saved-movies'
               component={SavedMovies}
               handleDelete={handleDelete}
               isMoviesLoaded={isMoviesLoaded}
@@ -206,7 +206,7 @@ function App() {
             />
 
             <ProtectedRoute
-              path='/movies'
+              path='/movies-explorer-frontend/movies'
               component={Movies}
               movies={movies}
               handleLike={handleLike}
@@ -217,27 +217,27 @@ function App() {
             />
 
             <ProtectedRoute
-              path='/profile'
+              path='/movies-explorer-frontend/profile'
               component={Profile}
               onUpdateUser={handleUserUpdate}
               onLogout={handleLogout}
               isServerLoadingData={isServerLoadingData}
             />
 
-            <Route path='/signup'>
+            <Route path='/movies-explorer-frontend/signup'>
               <Register
                 onRegistration={handleRegistration}
                 isServerLoadingData={isServerLoadingData}
               />
             </Route>
 
-            <Route path='/signin'>
+            <Route path='/movies-explorer-frontend/signin'>
               <Login
                 onLogin={handleLogin}
                 isServerLoadingData={isServerLoadingData} />
             </Route>
 
-            <Route exact path='/'>
+            <Route exact path='/movies-explorer-frontend/'>
               <Main />
             </Route>
 

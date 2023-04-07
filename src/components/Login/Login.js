@@ -27,7 +27,7 @@ function Login({ onLogin, isServerLoadingData }) {
             />
             <p className='login__info'>
               Want to make an account? 
-              <Link className='login__link content__link-style' to='/signup'>Sign up</Link>
+              <Link className='login__link content__link-style' to='/movies-explorer-frontend/signup'>Sign up</Link>
             </p>
           </section>
         )

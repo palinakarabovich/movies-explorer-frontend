@@ -5,7 +5,7 @@ import Navigation from "../Navigation/Navigation";
 import { Route } from 'react-router-dom';
 
 function Header() {
-  const endPoints = ['/movies', '/saved-movies', '/', '/profile'];
+  const endPoints = ['/movies-explorer-frontend/movies', '/movies-explorer-frontend/saved-movies', '/movies-explorer-frontend/', '/movies-explorer-frontend/profile'];
 
   return (
     <Route exact path={endPoints}>
