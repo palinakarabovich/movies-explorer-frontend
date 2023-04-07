@@ -1,33 +1,34 @@
-# "Movies-explorer" фронтенд
+# "Movies-explorer" frontend
 
-## Описание проекта
-Это фронтенд часть приложения для поиска фильмов, с возможностью сохранения/удаления их из избранного.
+## Description
+This is a front-end part of an application for finding movies, with the ability to save/remove them from favorites.
+Project on [GITHUB-PAGES](https://palinakarabovich.github.io/movies-explorer-frontend/)
+Backend can be found [here](https://github.com/palinakarabovich/movies-explorer-api)
 
-## Основной функционал
-* авторизация и регистрация пользователя,
-* отображение текущих данных пользователя в форме редактирования данных,
-* возможность редактирования данных профиля,
-* добавление фильма в избранное и его удаление от туда, в т.ч. через постановку/снятие лайка,
-* возможность поиска фильмов, по ключевым словам,
-* возможность фильтрации данных поиска по длительности фильма,
-* отображение найденных карточек фильмов и избранных на соответствующих страницах.
+## Functionality
+* user authorization and registration,
+* displaying the current user data in the data editing form,
+* the ability to edit profile data,
+* adding a movie to favorites and removing it from there, incl. by liking/unliking
+* the ability to search for movies by keywords,
+* the ability to filter search data by movie duration,
+* displaying found cards of films and favorites on the corresponding pages.
 
 ## Инструменты и технологии
 * HTML5,
 * CCS3,
 * JavaScript (ES6),
-* React (Create React App, разметка JSX, функциональные компоненты и хуки),
-* использован React Router,
-* использован объект history,
-* сайт адаптирован под разные расширения экранов,
-* реализовано бургер-меню для малых расширений,
+* React (Create React App, JSX markup, functional components and hooks),
+* React Router,
+* UseHistory
+* the site is adapted for different screen extensions,
+* implemented burger menu for small extensions,
 * flexbox,
 * grid,
-* БЭМ (наименование классов),
+* BEM-naming
 * Webpack.
 
 ------------
 
-* [Ссылка на макет в Figma](https://www.figma.com/file/mRQRmjCvYJAdXkqXZomvXv/diploma?node-id=891%3A3857)
-* [Ссылка на проект](https://movies.karabovich.nomoredomains.club/)
-* [Ссылка на pull request](https://github.com/palinakarabovich/movies-explorer-frontend/compare/main...level-3)
+* [Figma](https://www.figma.com/file/mRQRmjCvYJAdXkqXZomvXv/diploma?node-id=891%3A3857)
+
