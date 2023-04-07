@@ -14,7 +14,7 @@ Backend can be found [here](https://github.com/palinakarabovich/movies-explorer-
 * the ability to filter search data by movie duration,
 * displaying found cards of films and favorites on the corresponding pages.
 
-## Инструменты и технологии
+## Tools and technologies
 * HTML5,
 * CCS3,
 * JavaScript (ES6),
