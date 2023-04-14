@@ -2,7 +2,7 @@
 
 ## Description
 This is a front-end part of an application for finding movies, with the ability to save/remove them from favorites.
-Project on [GITHUB-PAGES](https://palinakarabovich.github.io/movies-explorer-frontend/). Login: cat@cat.cat, password: cat123
+Project on [GITHUB-PAGES](https://palinakarabovich.github.io/movies-explorer-frontend/). Login: cat@cat.cat, password: cat123.
 Backend can be found [here](https://github.com/palinakarabovich/movies-explorer-api)
 
 ## Functionality
