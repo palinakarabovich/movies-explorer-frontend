@@ -19,7 +19,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectdRoute';
 import ServerInfo from '../ServerInfo/ServerInfo';
 import { SERVER_RESPONSE_SUCCESS, SERVER_RESPONSE_ERROR, MESSAGE_SUCCESS_REGISTRATION, MESSAGE_SUCCESS_USER_DATA_SAVED } from '../../utils/constants';
 import { parceServerErrors } from '../../utils/serverErrorsParcer';
-import { MemoryRouter, Redirect } from 'react-router-dom/cjs/react-router-dom.min';
+import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 
 function App() {
 
@@ -195,14 +195,14 @@ function App() {
 
           <Switch>
 
-            <MemoryRouter
-              path='/movies-explorer-frontend/saved-movies'
-              component={SavedMovies}
-              handleDelete={handleDelete}
-              isMoviesLoaded={isMoviesLoaded}
-              setMoviesLoaded={setMoviesLoaded}
-              isServerLoadingData={isSavedMoviesLoading}
-            />
+            <Route path='/movies-explorer-frontend/saved-movies'>
+              <SavedMovies
+                handleDelete={handleDelete}
+                isMoviesLoaded={isMoviesLoaded}
+                setMoviesLoaded={setMoviesLoaded}
+                isServerLoadingData={isSavedMoviesLoading}
+              />
+            </Route>
 
             <Route path='/movies-explorer-frontend/movies' >
               <Movies

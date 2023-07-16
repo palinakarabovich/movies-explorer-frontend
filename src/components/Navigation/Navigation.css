@@ -12,10 +12,11 @@
   align-items: center;
   text-align: right;
   color: #000000;
+  transition: .3s ease-in-out color;
 }
 
 .nav-not-logged-in__button_type_sign-up:hover {
-  color: white;
+  color: gray;
 }
 
 .nav-logged-in__button:hover {
@@ -34,11 +35,13 @@
   background-color: black;
   border-radius: 3px;
   margin-left: 30px;
+  transition: .3s ease-in-out background-color;
 }
 
 .nav-not-logged-in__button_type_sign-in:hover {
   color: black;
-  background-color: white;
+  background-color: gray;
+  color: white;
 }
 
 .nav-logged-in_type_full-screen {

@@ -20,14 +20,17 @@ function Login({ onLogin, isServerLoadingData }) {
           <section className='login'>
             <Logo />
             <h2 className='login__title'>Nice to see you!</h2>
+            <p className='login__info'>Testing data</p>
+            <p className='login__info'>Email: cat@cat.cat</p>
+            <p className='login__info'>Password: cat123</p>
             <AuthForm
               FormTypeLogin
               onSubmit={onLogin}
               isServerLoadingData={isServerLoadingData}
             />
             <p className='login__info'>
-              Want to make an account? 
-              <Link className='login__link content__link-style' to='/movies-explorer-frontend/signup'>Sign up</Link>
+              Are you new here? 
+              <Link className='login__link content__link-style' to='/movies-explorer-frontend/signup'>Create an account</Link>
             </p>
           </section>
         )

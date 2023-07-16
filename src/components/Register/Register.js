@@ -18,13 +18,13 @@ function Register({ onRegistration, isServerLoadingData }) {
         : (
           <section className='register'>
             <Logo />
-            <h2 className='register__title'>Are you intrested film-lover?</h2>
+            <h2 className='register__title'>Join us!</h2>
             <AuthForm
               onSubmit={onRegistration}
               isServerLoadingData={isServerLoadingData}
             />
             <p className='register__info'>
-              Have an account?
+              Do you have an account?
               <Link className='register__link content__link-style' to='/movies-explorer-frontend/signin'>Sign in</Link>
             </p>
           </section>)

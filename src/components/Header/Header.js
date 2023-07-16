@@ -6,24 +6,25 @@ import React from 'react';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 
 function Header() {
+
   const location = useLocation();
-  const [isLogo, setLogo] = React.useState(true);
+  const [isLogoVisiable, setLogoVisiable] = React.useState(true);
 
   React.useEffect(() => {
     if (!location.pathname.includes('signin') && !location.pathname.includes('signup')) {
-      setLogo(true);
-      console.log('true')
+      setLogoVisiable(true);
     } else {
-      setLogo(false);
-      console.log('false')
+      setLogoVisiable(false);
     }
   }, [location])
 
   return (
 
     <header className='header'>
-      <Logo isLogo={isLogo} />
-      <Navigation isLogo={isLogo} />
+      {
+        isLogoVisiable && <Logo />
+      }
+      <Navigation />
     </header>
   )
 }
