@@ -16,9 +16,9 @@ function MoviesCardList({ movies, handleLike, handleDelete, isMoviesLoaded, sear
 
   const getCount = (windowSize) => {
     if (windowSize >= DESKTOP_WIDTH) {
-      return { first: 12, extra: 3 };
+      return { first: 12, extra: 4 };
     } if (windowSize > MOBILE_WIDTH && windowSize <= TABLET_WIDTH) {
-      return { first: 8, extra: 2 };
+      return { first: 8, extra: 3 };
     }
     return { first: 5, extra: 2 };
   };
@@ -57,7 +57,12 @@ function MoviesCardList({ movies, handleLike, handleDelete, isMoviesLoaded, sear
       {isMoviesLoaded
         ? (<Loader />)
         : searchValue === '' && page === PAGE_ALL_MOVIES
-          ? <p className='movies-list__empty'>Use search bar above to find some films. After you can also click on a small heart under the picture to save the movie to your favorites  :-) </p>
+          ? (<><ul className='movies-list__cards content__list-style'>
+          {
+            moviesToRender.map((movie) => (<MoviesCard movie={movie} handleLike={handleLike} key={movie.id || movie._id} handleDelete={handleDelete} />))
+          }
+        </ul>
+          {currentCount < movies.length && (<button value='еще' className='movies-list__button movies-list__button_type_load' aria-label='Show more' onClick={renderMore}>More</button>)}</>)
           : savedMovies.length === 0 && page === PAGE_SAVED_MOVIES
             ? (<p className='movies-list__empty'>You have not added any films to favoutites yet</p>)
             : movies.length === 0 && !isMoviesLoaded
@@ -67,7 +72,7 @@ function MoviesCardList({ movies, handleLike, handleDelete, isMoviesLoaded, sear
                   moviesToRender.map((movie) => (<MoviesCard movie={movie} handleLike={handleLike} key={movie.id || movie._id} handleDelete={handleDelete} />))
                 }
               </ul>
-                {currentCount < movies.length && (<button value='еще' className='movies-list__button movies-list__button_type_load' aria-label='Show more' onClick={renderMore}>More</button>)}</>)
+                {currentCount < movies.length && (<button value='more' className='movies-list__button movies-list__button_type_load' aria-label='Show more' onClick={renderMore}>More</button>)}</>)
       }
     </section>
   );

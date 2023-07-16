@@ -1,0 +1,43 @@
+.saved-movies__container{
+  padding: 150px 0;
+}
+
+.saved-movies{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.saved-movies__text{
+  margin: 0 auto;
+  width: 40%;
+}
+
+.container-buttons-group{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+.container-buttons-group__button{
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  display: flex;
+  align-items: center;
+  color: #FFFFFF;
+  padding: 8px 20px;
+  background-color: black;
+  border-radius: 3px;
+  margin-left: 30px;
+  transition: .3s ease-in-out background-color;
+  text-decoration: none;
+}
+
+.container-buttons-group__button:hover {
+  color: black;
+  background-color: gray;
+  color: white;
+}

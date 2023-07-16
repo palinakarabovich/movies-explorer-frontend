@@ -52,7 +52,7 @@ function Profile({ onUpdateUser, onLogout, isServerLoadingData }) {
       <button className='profile__button profile__button_type_edit' onClick={onEditProfileClick} disabled={isButtonDisabled}>
         {isEditMode ? 'Save' : 'Edit'}
       </button>
-      <button className='profile__button profile__button_type_sign-out' onClick={onLogout}>Log out</button>
+      <button className='profile__button profile__button_type_sign-out' onClick={onLogout}>Sign out</button>
     </section>
   );
 }

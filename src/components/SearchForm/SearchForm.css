@@ -51,6 +51,7 @@
   font-weight: 500;
   font-size: 14px;
   line-height: 18px;
+  transition: .3s ease-in-out;
 }
 
 .search-form__block-button_type_search:disabled{

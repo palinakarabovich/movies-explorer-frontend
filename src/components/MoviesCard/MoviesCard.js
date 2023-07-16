@@ -9,7 +9,7 @@ import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function MoviesCard({ movie, handleLike, handleDelete }) {
   const [isLiked, setLiked] = React.useState(false);
-  const { savedMovies } = React.useContext(CurrentUserContext);
+  const { savedMovies, loggedIn } = React.useContext(CurrentUserContext);
 
   React.useEffect(() => {
     setLiked((state) => state = savedMovies.some(m => m.movieId === movie.id));
@@ -47,7 +47,9 @@ function MoviesCard({ movie, handleLike, handleDelete }) {
         <h2 className='movie-card__block-name'>{movie.nameEN}</h2>
 
         <Route exact path='/movies-explorer-frontend/movies'>
-          <button className={`movie-card__block-button movie-card__block-button_type_like ${isLiked && 'movie-card__block-button_type_like_active'}`} aria-label='Add to favourites' onClick={onLikeClick} />
+          {
+            loggedIn && <button className={`movie-card__block-button movie-card__block-button_type_like ${isLiked && 'movie-card__block-button_type_like_active'}`} aria-label='Add to favourites' onClick={onLikeClick} />
+          }
         </Route>
 
         <Route exact path='/movies-explorer-frontend/saved-movies'>

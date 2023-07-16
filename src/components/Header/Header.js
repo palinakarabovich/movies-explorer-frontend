@@ -2,18 +2,30 @@ import './Header.css';
 
 import Logo from "../Logo/Logo";
 import Navigation from "../Navigation/Navigation";
-import { Route } from 'react-router-dom';
+import React from 'react';
+import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 
 function Header() {
-  const endPoints = ['/movies-explorer-frontend/movies', '/movies-explorer-frontend/saved-movies', '/movies-explorer-frontend/', '/movies-explorer-frontend/profile'];
+
+  const location = useLocation();
+  const [isLogoVisiable, setLogoVisiable] = React.useState(true);
+
+  React.useEffect(() => {
+    if (!location.pathname.includes('signin') && !location.pathname.includes('signup')) {
+      setLogoVisiable(true);
+    } else {
+      setLogoVisiable(false);
+    }
+  }, [location])
 
   return (
-    <Route exact path={endPoints}>
-      <header className='header'>
-        <Logo />
-        <Navigation />
-      </header>
-    </Route>
+
+    <header className='header'>
+      {
+        isLogoVisiable && <Logo />
+      }
+      <Navigation />
+    </header>
   )
 }
 

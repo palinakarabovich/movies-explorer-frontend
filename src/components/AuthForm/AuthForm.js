@@ -75,7 +75,7 @@ function AuthForm({ FormTypeLogin, onSubmit }) {
         <span className='auth-form__error'>{errors.password}</span>
       </label>
 
-      <button type='submit' className={`auth-form__submit-button ${FormTypeLogin ? 'auth-form__submit-button_type_signin' : 'auth-form__submit-button_type_signup'}`} disabled={!isValid}>{FormTypeLogin ? 'Login' : 'Sign up'}</button>
+      <button type='submit' className={`auth-form__submit-button ${FormTypeLogin ? 'auth-form__submit-button_type_signin' : 'auth-form__submit-button_type_signup'}`} disabled={!isValid}>{FormTypeLogin ? 'Sign in' : 'Sign up'}</button>
     </form>
   );
 }

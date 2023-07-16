@@ -19,6 +19,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectdRoute';
 import ServerInfo from '../ServerInfo/ServerInfo';
 import { SERVER_RESPONSE_SUCCESS, SERVER_RESPONSE_ERROR, MESSAGE_SUCCESS_REGISTRATION, MESSAGE_SUCCESS_USER_DATA_SAVED } from '../../utils/constants';
 import { parceServerErrors } from '../../utils/serverErrorsParcer';
+import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 
 function App() {
 
@@ -46,18 +47,16 @@ function App() {
   }, []);
 
   React.useEffect(() => {
-    if (loggedIn) {
-      moviesApi.getMovies().then((data) => {
-        setMovies(data);
+    moviesApi.getMovies().then((data) => {
+      setMovies(data);
+      setAllMoviesLoading(false);
+    })
+      .catch((err) => {
+        setServerMessage(err);
+        setServerInfoVisible(true);
         setAllMoviesLoading(false);
-      })
-        .catch((err) => {
-          setServerMessage(err);
-          setServerInfoVisible(true);
-          setAllMoviesLoading(false);
-        });
-    }
-  }, [loggedIn])
+      });
+  }, [])
 
   React.useEffect(() => {
     if (loggedIn) {
@@ -119,7 +118,7 @@ function App() {
   const handleLogout = () => {
     localStorage.clear();
     setLoggedIn(false);
-    history.push('/movies-explorer-frontend/');
+    history.push('/movies-explorer-frontend/movies');
   }
 
   const handleCheckToken = () => {
@@ -196,25 +195,26 @@ function App() {
 
           <Switch>
 
-            <ProtectedRoute
-              path='/movies-explorer-frontend/saved-movies'
-              component={SavedMovies}
-              handleDelete={handleDelete}
-              isMoviesLoaded={isMoviesLoaded}
-              setMoviesLoaded={setMoviesLoaded}
-              isServerLoadingData={isSavedMoviesLoading}
-            />
+            <Route path='/movies-explorer-frontend/saved-movies'>
+              <SavedMovies
+                handleDelete={handleDelete}
+                isMoviesLoaded={isMoviesLoaded}
+                setMoviesLoaded={setMoviesLoaded}
+                isServerLoadingData={isSavedMoviesLoading}
+              />
+            </Route>
 
-            <ProtectedRoute
-              path='/movies-explorer-frontend/movies'
-              component={Movies}
-              movies={movies}
-              handleLike={handleLike}
-              handleDelete={handleDelete}
-              isMoviesLoaded={isMoviesLoaded}
-              setMoviesLoaded={setMoviesLoaded}
-              isServerLoadingData={isAllMoviesLoading}
-            />
+            <Route path='/movies-explorer-frontend/movies' >
+              <Movies
+                component={Movies}
+                movies={movies}
+                handleLike={handleLike}
+                handleDelete={handleDelete}
+                isMoviesLoaded={isMoviesLoaded}
+                setMoviesLoaded={setMoviesLoaded}
+                isServerLoadingData={isAllMoviesLoading}
+              />
+            </Route>
 
             <ProtectedRoute
               path='/movies-explorer-frontend/profile'
@@ -238,7 +238,7 @@ function App() {
             </Route>
 
             <Route exact path='/movies-explorer-frontend/'>
-              <Main />
+              <Redirect to='/movies-explorer-frontend/movies' />
             </Route>
 
             <Route path='*'>
