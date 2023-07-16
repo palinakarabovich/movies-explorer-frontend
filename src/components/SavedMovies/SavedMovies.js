@@ -59,7 +59,7 @@ function SavedMovies({ handleDelete, isMoviesLoaded, setMoviesLoaded, isServerLo
               page={PAGE_SAVED_MOVIES} />
           </>
           : <div className='saved-movies__container'>
-            <p className='saved-movies__container-text'>Use your account or create a new one to add and save your favoirire movies.</p>
+            <p className='saved-movies__container-text'>Use your account or create a new one to add and save your favorite movies.</p>
           <div className='saved-movies__container-buttons-group container-buttons-group'>
             <Link to='/movies-explorer-frontend/signup' className='container-buttons-group__button' aria-label='Sign up' >{'Sign up'}</Link>
             <Link to='/movies-explorer-frontend/signin' className='container-buttons-group__button' aria-label='Sign in'>{'Sign in'}</Link>
