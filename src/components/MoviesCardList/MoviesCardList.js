@@ -72,7 +72,7 @@ function MoviesCardList({ movies, handleLike, handleDelete, isMoviesLoaded, sear
                   moviesToRender.map((movie) => (<MoviesCard movie={movie} handleLike={handleLike} key={movie.id || movie._id} handleDelete={handleDelete} />))
                 }
               </ul>
-                {currentCount < movies.length && (<button value='еще' className='movies-list__button movies-list__button_type_load' aria-label='Show more' onClick={renderMore}>More</button>)}</>)
+                {currentCount < movies.length && (<button value='more' className='movies-list__button movies-list__button_type_load' aria-label='Show more' onClick={renderMore}>More</button>)}</>)
       }
     </section>
   );

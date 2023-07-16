@@ -19,7 +19,7 @@ function Login({ onLogin, isServerLoadingData }) {
         : (
           <section className='login'>
             <Logo />
-            <h2 className='login__title'>Hice to see you!</h2>
+            <h2 className='login__title'>Nice to see you!</h2>
             <AuthForm
               FormTypeLogin
               onSubmit={onLogin}

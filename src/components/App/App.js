@@ -19,6 +19,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectdRoute';
 import ServerInfo from '../ServerInfo/ServerInfo';
 import { SERVER_RESPONSE_SUCCESS, SERVER_RESPONSE_ERROR, MESSAGE_SUCCESS_REGISTRATION, MESSAGE_SUCCESS_USER_DATA_SAVED } from '../../utils/constants';
 import { parceServerErrors } from '../../utils/serverErrorsParcer';
+import { MemoryRouter, Redirect } from 'react-router-dom/cjs/react-router-dom.min';
 
 function App() {
 
@@ -117,7 +118,7 @@ function App() {
   const handleLogout = () => {
     localStorage.clear();
     setLoggedIn(false);
-    history.push('/movies-explorer-frontend/');
+    history.push('/movies-explorer-frontend/movies');
   }
 
   const handleCheckToken = () => {
@@ -194,7 +195,7 @@ function App() {
 
           <Switch>
 
-            <ProtectedRoute
+            <MemoryRouter
               path='/movies-explorer-frontend/saved-movies'
               component={SavedMovies}
               handleDelete={handleDelete}
@@ -203,16 +204,17 @@ function App() {
               isServerLoadingData={isSavedMoviesLoading}
             />
 
-            <ProtectedRoute
-              path='/movies-explorer-frontend/movies'
-              component={Movies}
-              movies={movies}
-              handleLike={handleLike}
-              handleDelete={handleDelete}
-              isMoviesLoaded={isMoviesLoaded}
-              setMoviesLoaded={setMoviesLoaded}
-              isServerLoadingData={isAllMoviesLoading}
-            />
+            <Route path='/movies-explorer-frontend/movies' >
+              <Movies
+                component={Movies}
+                movies={movies}
+                handleLike={handleLike}
+                handleDelete={handleDelete}
+                isMoviesLoaded={isMoviesLoaded}
+                setMoviesLoaded={setMoviesLoaded}
+                isServerLoadingData={isAllMoviesLoading}
+              />
+            </Route>
 
             <ProtectedRoute
               path='/movies-explorer-frontend/profile'
@@ -236,7 +238,7 @@ function App() {
             </Route>
 
             <Route exact path='/movies-explorer-frontend/'>
-              <Main />
+              <Redirect to='/movies-explorer-frontend/movies' />
             </Route>
 
             <Route path='*'>

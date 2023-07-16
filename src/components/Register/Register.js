@@ -18,7 +18,7 @@ function Register({ onRegistration, isServerLoadingData }) {
         : (
           <section className='register'>
             <Logo />
-            <h2 className='register__title'>Nice to see you!</h2>
+            <h2 className='register__title'>Are you intrested film-lover?</h2>
             <AuthForm
               onSubmit={onRegistration}
               isServerLoadingData={isServerLoadingData}
