@@ -46,18 +46,16 @@ function App() {
   }, []);
 
   React.useEffect(() => {
-    if (loggedIn) {
-      moviesApi.getMovies().then((data) => {
-        setMovies(data);
+    moviesApi.getMovies().then((data) => {
+      setMovies(data);
+      setAllMoviesLoading(false);
+    })
+      .catch((err) => {
+        setServerMessage(err);
+        setServerInfoVisible(true);
         setAllMoviesLoading(false);
-      })
-        .catch((err) => {
-          setServerMessage(err);
-          setServerInfoVisible(true);
-          setAllMoviesLoading(false);
-        });
-    }
-  }, [loggedIn])
+      });
+  }, [])
 
   React.useEffect(() => {
     if (loggedIn) {

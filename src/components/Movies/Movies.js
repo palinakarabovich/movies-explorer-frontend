@@ -16,6 +16,8 @@ function Movies({ movies, handleLike, handleDelete, isMoviesLoaded, setMoviesLoa
     if (searchValue !== '') {
       setMoviesLoaded(true);
       setSortedMovies((state) => state = filterMovies(movies, searchValue));
+    } else {
+      setSortedMovies(movies);
     }
     if (checkboxIsChecked) {
       setMoviesLoaded(true);
