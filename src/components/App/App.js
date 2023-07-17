@@ -100,6 +100,8 @@ function App() {
   }
 
   const handleLogin = (email, password) => {
+    setServerLoadingData(true);
+    setServerInfoVisible(true);
     api.login(email, password).then((data) => {
       if (data) {
         setServerLoadingData(false);
@@ -107,6 +109,7 @@ function App() {
         setLoggedIn(true);
         history.push('/movies-explorer-frontend/movies');
         handleCheckToken();
+        setServerInfoVisible(false);
       }
     })
       .catch((err) => {
